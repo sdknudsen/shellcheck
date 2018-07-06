@@ -1,0 +1,52 @@
+*ShellCheck.Parser> debugParseScript "[ abc == abc ]"
+(T_Annotation (Id 0) [] (T_Script (Id 11) "" [T_Pipeline (Id 10) [] [T_Redirecting (Id 9) []
+			 (T_Condition (Id 8) SingleBracket
+			  (TC_Binary (Id 5) SingleBracket "=="
+			   (T_NormalWord (Id 3) [T_Literal (Id 2) "abc"])
+			   (T_NormalWord (Id 7) [T_Literal (Id 6) "abc"])))]]))
+
+*ShellCheck.Parser> debugParseScript "test abc == abc"
+(T_Annotation (Id 0) [] (T_Script (Id 13) "" [T_Pipeline (Id 12) [] [T_Redirecting (Id 10) []
+			 (T_SimpleCommand (Id 11) [] [T_NormalWord (Id 3) [T_Literal (Id 2) "test"],
+			  T_NormalWord (Id 5) [T_Literal (Id 4) "abc"],
+			  T_NormalWord (Id 7) [T_Literal (Id 6) "=="],
+			  T_NormalWord (Id 9) [T_Literal (Id 8) "abc"]])]]))
+
+*ShellCheck.Parser> debugParseScript "[ abc = abc ]"
+(T_Annotation (Id 0) [] (T_Script (Id 11) "" [T_Pipeline (Id 10) [] [T_Redirecting (Id 9) []
+			 (T_Condition (Id 8) SingleBracket
+			  (TC_Binary (Id 5) SingleBracket "="
+			   (T_NormalWord (Id 3) [T_Literal (Id 2) "abc"])
+			   (T_NormalWord (Id 7) [T_Literal (Id 6) "abc"])))]]))
+
+*ShellCheck.Parser> debugParseScript "test abc = abc"
+(T_Annotation (Id 0) [] (T_Script (Id 13) "" [T_Pipeline (Id 12) [] [T_Redirecting (Id 10) []
+			 (T_SimpleCommand (Id 11) [] [T_NormalWord (Id 3) [T_Literal (Id 2) "test"],
+			  T_NormalWord (Id 5) [T_Literal (Id 4) "abc"],
+			  T_NormalWord (Id 7) [T_Literal (Id 6) "="],
+			  T_NormalWord (Id 9) [T_Literal (Id 8) "abc"]])]]))
+
+(T_Annotation (Id 0) [] (T_Script (Id 8) "" [T_Pipeline (Id 7) [] [T_Redirecting (Id 6) [] 
+			 (T_Condition (Id 5) SingleBracket
+			  (TC_Unary (Id 2) SingleBracket "-n"
+			   (T_NormalWord (Id 4) [T_Literal (Id 3) "hi"])))]]))
+
+
+*ShellCheck.Parser> debugParseScript "[[ true ]]; false"
+(T_Annotation (Id 0) [] (T_Script (Id 15) "" [T_Pipeline (Id 7) [] [T_Redirecting (Id 6) [] 
+			 (T_Condition (Id 5) DoubleBracket 
+			  (TC_Nullary (Id 4) DoubleBracket 
+			   (T_NormalWord (Id 3) [T_Literal (Id 2) "true"])))],
+			 T_Pipeline (Id 14) [] [T_Redirecting (Id 12) [] 
+			 (T_SimpleCommand (Id 13) [] [T_NormalWord (Id 11) [T_Literal (Id 10) "false"]])]]))
+
+*ShellCheck.Parser> debugParseScript "[ true ] ; false "
+(T_Annotation (Id 0) [] (T_Script (Id 15) "" [T_Pipeline (Id 7) [] [T_Redirecting (Id 6) [] 
+			 (T_Condition (Id 5) SingleBracket 
+			  (TC_Nullary (Id 4) SingleBracket 
+			   (T_NormalWord (Id 3) [T_Literal (Id 2) "true"])))],
+
+*ShellCheck.Parser> debugParseScript "test true ; false"
+(T_Annotation (Id 0) [] (T_Script (Id 16) "" [T_Pipeline (Id 8) [] [T_Redirecting (Id 6) [] 
+			 (T_SimpleCommand (Id 7) [] [T_NormalWord (Id 3) [T_Literal (Id 2) "test"],
+			  T_NormalWord (Id 5) [T_Literal (Id 4) "true"]])],
