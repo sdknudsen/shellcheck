@@ -1,0 +1,5 @@
+https://github.com/koalaman/shellcheck/issues/661
+
+pc104:shellcheck stefan.knudsen$ ghci src/ShellCheck/Parser.hs
+
+in shellcheck parser.hs, ~ line 920 (function readCondition)
