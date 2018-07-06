@@ -901,9 +901,11 @@ prop_readCondition22= isOk readCondition "[[ $1 =~ \\.a\\.(\\.b\\.)\\.c\\. ]]"
 readCondition = called "test expression" $ do
     opos <- getPosition
     start <- startSpan
-    open <- try (string "[[") <|> string "["
-    let single = open == "["
-    let typ = if single then SingleBracket else DoubleBracket
+    open <- try (string "[[") <|> try (string "[") <|> string "test"
+    let single = open == "[" || open == "test"
+    let typ = if single then SingleBracket
+              -- else if open == "test" then Test
+              else DoubleBracket
 
     pos <- getPosition
     space <- allspacing
@@ -922,6 +924,7 @@ readCondition = called "test expression" $ do
         return $ TC_Empty id typ
 
     cpos <- getPosition
+    -- close <- try (string "]]") <|> try (string "]") <|> string ""
     close <- try (string "]]") <|> string "]" <|> fail "Expected test to end here (don't wrap commands in []/[[]])"
     id <- endSpan start
     when (open == "[[" && close /= "]]") $ parseProblemAt cpos ErrorC 1033 "Did you mean ]] ?"

@@ -143,7 +143,7 @@ data Annotation =
     | SourceOverride String
     | ShellOverride String
     deriving (Show, Eq)
-data ConditionType = DoubleBracket | SingleBracket deriving (Show, Eq)
+data ConditionType = DoubleBracket | SingleBracket | Test deriving (Show, Eq)
 
 -- This is an abomination.
 tokenEquals :: Token -> Token -> Bool
